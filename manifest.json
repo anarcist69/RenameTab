@@ -23,6 +23,7 @@
     "scripts": ["background.js"]
   },
   "permissions": [
+    "contextMenus",
     "tabs",
 	 "http://*/",
 	 "activeTab"

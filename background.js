@@ -26,3 +26,15 @@ chrome.extension.onMessage.addListener(
 function escapeInput(input) {
   return input.replace(/'/g, "\\'");
 }
+
+function contextClick(e){
+  chrome.tabs.executeScript(null,
+      {code:"var head = document.createElement('head');var title = document.createElement('title');var text = document.createTextNode('" + escapeInput(e.selectionText) + "');title.appendChild(text);head.appendChild(title);document.body.appendChild(head);document.title='"+escapeInput(e.selectionText)+"';"
+      });
+}
+
+chrome.contextMenus.create({
+    title: "Rename Tab to: %s",
+    contexts:["selection"],
+    onclick: contextClick
+});
